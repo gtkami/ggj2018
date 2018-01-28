@@ -72,17 +72,20 @@ public class inputs : MonoBehaviour {
         Vector2 direction = new Vector2(0, 0);
         if (Input.GetKey(input[0]))
         {
-            direction.x = -0.3f;
+            direction.x = -1f;
             GetComponent<SpriteRenderer>().flipX = true;
         }
         if (Input.GetKey(input[1]))
         {
-            direction.x = 0.3f;
+            direction.x = 1f;
             GetComponent<SpriteRenderer>().flipX = false;
         }
-        Vector3 position = transform.position;
-        transform.position = new Vector3(position.x + direction.x, position.y + direction.y, position.z);
-        Jump(direction);
+        if (Input.GetKeyDown(input[2]))
+        {
+            GetComponent<Animator>().Play(skin + "_jump");
+            direction.y = 1;
+        }
+        rb.AddForce(new Vector2(direction.x * 1000f, direction.y * 30000f));
 
     }
 
@@ -101,13 +104,4 @@ public class inputs : MonoBehaviour {
             GetComponent<Animator>().Play(skin + "_slide");
         }
     } 
-
-    private void Jump (Vector2 direction)
-    {
-        if (Input.GetKeyDown(input[2]))
-        {
-            rb.AddForce(new Vector2(direction.x * 40000f, 30000f));
-            GetComponent<Animator>().Play(skin + "_jump");
-        }
-    }
 }
