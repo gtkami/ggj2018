@@ -106,7 +106,7 @@ public class inputs : MonoBehaviour {
     {
         if (Input.GetKeyDown(input[2]))
         {
-            rb.AddForce(new Vector2(direction.x * 40000f, 20000f));
+            rb.AddForce(new Vector2(direction.x * 40000f, 30000f));
             GetComponent<Animator>().Play(skin + "_jump");
         }
     }
