@@ -20,10 +20,7 @@ public class inputs : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (objectsTouching.Count > 0)
-        {
-            Motion();
-        }
+        Motion();
         Kick();
     }
 
@@ -85,7 +82,13 @@ public class inputs : MonoBehaviour {
             GetComponent<Animator>().Play(skin + "_jump");
             direction.y = 1;
         }
-        rb.AddForce(new Vector2(direction.x * 1000f, direction.y * 30000f));
+
+        if (objectsTouching.Count > 0)
+        {
+            rb.AddForce(new Vector2(direction.x * 1000f, direction.y * 35000f));
+        }
+        Vector3 position = transform.position;
+        transform.position = new Vector3(position.x + direction.x / 10f, position.y, position.z);
 
     }
 
